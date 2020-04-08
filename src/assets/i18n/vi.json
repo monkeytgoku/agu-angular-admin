@@ -1,0 +1,23 @@
+
+{
+  "SHARED": {
+    "I18N": {
+      "language": "Ngôn ngữ",
+      "vietnamese": "Tiếng Việt",
+      "english": "Tiếng Anh"
+    }
+  },
+  "AUTH": {
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "userName": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "userNameIsRequired": "Tên đăng nhập không được trống!",
+    "passwordIsRequired": "Mật khẩu không được trống!",
+    "incorrectUserNameOrPassword": "Tên đăng nhập hoặc mật khẩu không đúng!",
+    "rememberMe": "Nhớ tên đăng nhập",
+    "forgotPassword": "Quên mật khẩu?",
+    "loginWithFacebook": "Đăng nhập bằng Facebook",
+    "loginWithGoogle": "Đăng nhập bằng Google"
+  }
+}

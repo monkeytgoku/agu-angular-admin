@@ -1,0 +1,25 @@
+.login {
+  display: flex;
+  padding: 10rem;
+
+  justify-content: center;
+  align-items: center;
+
+  &__card {
+    width: 30%;
+    padding: 10rem 5rem;
+    background-color: rgba(0,0,0,.04);
+  }
+
+  &__input {
+    width: 100%;
+  }
+
+  &__action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 2.5rem;
+  }
+}

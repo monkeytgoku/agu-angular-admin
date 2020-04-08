@@ -1,0 +1,22 @@
+{
+  "SHARED": {
+    "I18N": {
+      "language": "Language",
+      "vietnamese": "Vietnamese",
+      "english": "English"
+    }
+  },
+  "AUTH": {
+    "login": "Login",
+    "logout": "Logout",
+    "userName": "Username",
+    "password": "Password",
+    "userNameIsRequired": "Username is required!",
+    "passwordIsRequired": "Password is required!",
+    "incorrectUserNameOrPassword": "Incorrect Username or Password!",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "loginWithFacebook": "Login with Facebook",
+    "loginWithGoogle": "Login with Google"
+  }
+}

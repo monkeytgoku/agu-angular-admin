@@ -1,1 +1,34 @@
-<p>login works!</p>
+<div class="login">
+  <mat-card class="login__card">
+    <form class="login__form" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+      <mat-form-field class="login__input">
+        <mat-label>{{ "AUTH.userName" | translate }}</mat-label>
+        <input matInput type="text"
+          required
+          [ngModel]="initialUser.userName" name="userName"
+          #userName="ngModel">
+      </mat-form-field>
+      <div [hidden]="userName.valid || !userName.touched" class="error error-message">
+        {{ "AUTH.userNameIsRequired" | translate }}
+      </div>
+
+      <mat-form-field class="login__input">
+        <mat-label>{{ "AUTH.password" | translate }}</mat-label>
+        <input matInput type="password"
+          required
+          ngModel name="password"
+          #password="ngModel">
+      </mat-form-field>
+      <div [hidden]="password.valid || !password.touched" class="error error-message">
+        {{ "AUTH.passwordIsRequired" | translate }}
+      </div>
+
+      <div class="login__action">
+        <mat-checkbox [ngModel]="initialUser.isRememberMe" name="isRememberMe" class="example-margin">{{ "AUTH.rememberMe" | translate }}</mat-checkbox>
+        <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">
+          {{ "AUTH.login" | translate }}
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

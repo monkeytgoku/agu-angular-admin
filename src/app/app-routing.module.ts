@@ -16,12 +16,12 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    loadChildren: './user/user.module#UsersModule',
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
     canActivate: []
   },
   {
     path: 'role',
-    loadChildren: './role.module#RolesModule',
+    loadChildren: './roles/roles.module#RolesModule',
     canActivate: []
   },
   {
