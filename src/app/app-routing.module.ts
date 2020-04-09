@@ -21,7 +21,22 @@ const routes: Routes = [
   },
   {
     path: 'role',
-    loadChildren: './roles/roles.module#RolesModule',
+    loadChildren: () => import('./roles/roles.module').then(m => m.RolesModule),
+    canActivate: []
+  },
+  {
+    path: 'category',
+    loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule),
+    canActivate: []
+  },
+  {
+    path: 'vendor',
+    loadChildren: () => import('./vendors/vendors.module').then(m => m.VendorsModule),
+    canActivate: []
+  },
+  {
+    path: 'product',
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
     canActivate: []
   },
   {

@@ -1,18 +1,6 @@
-import {
-  HttpHandler,
-  HttpHeaderResponse,
-  HttpInterceptor,
-  HttpProgressEvent,
-  HttpRequest,
-  HttpResponse,
-  HttpSentEvent,
-  HttpUserEvent,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-
-import { environment as config } from '../../../environments/environment';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -22,11 +10,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   constructor() { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpSentEvent |
-                                                       HttpHeaderResponse |
-                                                       HttpProgressEvent |
-                                                       HttpResponse<any> |
-                                                       HttpUserEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
       .pipe(
         catchError((error: HttpErrorResponse) => {

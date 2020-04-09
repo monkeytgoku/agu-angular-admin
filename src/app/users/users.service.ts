@@ -2,19 +2,16 @@ import { Injectable } from '@angular/core';
 
 import { environment as config } from '../../environments/environment';
 import { HttpService } from '../core/http/http.service';
+import { User } from '../shared/models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class UsersService {
 
   constructor(private http: HttpService) { }
 
-  login(data) {
-    return this.http.post(config.auth.authUrl, data);
-  }
-
-  getAuthorizationToken() {
-    return `Bearer ${localStorage.getItem('token')}`;
+  searchUsers(params) {
+    return this.http.get(`${config.api.baseUrl}/user`, params);
   }
 }
