@@ -11,7 +11,7 @@ export class UsersService {
 
   constructor(private http: HttpService) { }
 
-  searchUsers(params) {
-    return this.http.get(`${config.api.baseUrl}/user`, params);
+  searchUsers(params = {}) {
+    return this.http.get(`${config.api.baseUrl}/users`, params);
   }
 }

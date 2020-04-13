@@ -15,7 +15,7 @@ const routes: Routes = [
         component: VendorListComponent
       },
       {
-        path: ':roleID',
+        path: ':id',
         component: VendorDetailComponent
       }
     ],

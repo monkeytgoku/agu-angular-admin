@@ -1,0 +1,16 @@
+.user-list {
+  width: 98%;
+  height: calc(100% - 170px);
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+}
+
+.users-controls {
+  max-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
