@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './auth/login/login.component';
-import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { ForbiddenComponent } from './core/components/forbidden/forbidden.component';
+import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
+import { AdminGuard } from './core/guards/admin.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,27 +20,31 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
-    canActivate: []
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'role',
     loadChildren: () => import('./roles/roles.module').then(m => m.RolesModule),
-    canActivate: []
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'category',
     loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule),
-    canActivate: []
+    canActivate: [AuthGuard]
   },
   {
     path: 'vendor',
-    loadChildren: () => import('./vendors/vendors.module').then(m => m.VendorsModule),
-    canActivate: []
+    loadChildren: () => import('./vendors/vendors.module').then(m => m.VendorsModule)
+    // using canActivateChild
   },
   {
     path: 'product',
     loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
-    canActivate: []
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'forbidden',
+    component: ForbiddenComponent
   },
   {
     path: '**',

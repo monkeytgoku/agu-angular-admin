@@ -1,0 +1,29 @@
+<div class="header mat-elevation-z6">
+  <div class="logo">
+    <a routerLink="/">
+      <mat-icon style="padding: 0 10px 0 10px; color: green; font-size: 2rem;">eco</mat-icon>
+    </a>
+  </div>
+  <nav class="nav">
+    <!-- <a mat-button [matMenuTriggerFor]="user">User</a>
+    <mat-menu #user="matMenu" xPosition="after">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu> -->
+    <div class="nav__left">
+      <a mat-button routerLink="/user" routerLinkActive="active">User</a>
+      <a mat-button routerLink="/role" routerLinkActive="active">Role</a>
+      <a mat-button routerLink="/vendor" routerLinkActive="active">Vendor</a>
+      <a mat-button routerLink="/category" routerLinkActive="active">Category</a>
+      <a mat-button routerLink="/product" routerLinkActive="active">Product</a>
+    </div>
+
+    <div class="nav__right">
+      <label style="color: blue;">Signed in as {{ currentUser['user_name'] }}</label>
+      <a mat-button (click)="logout()"><mat-icon style="padding-bottom: 3px;">exit_to_app</mat-icon>{{ "AUTH.logout" | translate }}</a>
+      <div class="multi-lang">
+        <app-multi-language [enabledLabel]="false"></app-multi-language>
+      </div>
+    </div>
+  </nav>
+</div>

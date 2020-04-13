@@ -1,4 +1,12 @@
-<div class="multi-lang">
-  <app-multi-language></app-multi-language>
-</div>
-<router-outlet></router-outlet>
+<app-public-layout *ngIf="!auth.isLoggedIn()">
+  <div class="multi-lang">
+    <app-multi-language [enabledLabel]="true"></app-multi-language>
+  </div>
+  <router-outlet></router-outlet>
+</app-public-layout>
+
+<app-auth-layout *ngIf="auth.isLoggedIn()">
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</app-auth-layout>

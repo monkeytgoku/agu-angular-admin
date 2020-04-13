@@ -9,9 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor';
-import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { SharedModule } from './shared/shared.module';
 import { LoggingInterceptor } from './core/interceptors/logging-interceptor';
+import { HeaderComponent } from './core/components/header/header.component';
+import { FooterComponent } from './core/components/footer/footer.component';
+import { PublicLayoutComponent } from './core/layouts/public-layout/public-layout.component';
+import { AuthLayoutComponent } from './core/layouts/auth-layout/auth-layout.component';
+import { ForbiddenComponent } from './core/components/forbidden/forbidden.component';
 
 // required for AOT compilation
 export function createTranslateLoader(http: HttpClient) {
@@ -28,7 +33,12 @@ export const httpInterceptorProviders = [
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HeaderComponent,
+    FooterComponent,
+    PublicLayoutComponent,
+    AuthLayoutComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

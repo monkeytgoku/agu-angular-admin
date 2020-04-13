@@ -6,7 +6,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -18,7 +20,9 @@ const MAT_MODULES = [
   MatSelectModule,
   MatInputModule,
   MatButtonModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatMenuModule,
+  MatIconModule
 ];
 
 @NgModule({

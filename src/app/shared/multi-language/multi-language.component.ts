@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, AfterViewInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./multi-language.component.css']
 })
 export class MultiLanguageComponent implements OnInit, AfterViewInit, AfterViewChecked {
+  @Input() enabledLabel: boolean;
+
   constructor(public translate: TranslateService, private cdRef: ChangeDetectorRef) {
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('en');

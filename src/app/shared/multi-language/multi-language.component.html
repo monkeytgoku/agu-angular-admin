@@ -1,6 +1,6 @@
-<mat-form-field>
-  <mat-label>{{ "SHARED.I18N.language" | translate }}</mat-label>
-  <mat-select #language [value]="'en'" (selectionChange)="changeLang(language.value)">
+<mat-form-field [style.width.px]="90">
+  <mat-label *ngIf="enabledLabel">{{ "SHARED.I18N.language" | translate }}</mat-label>
+  <mat-select #language [value]="'en'" (selectionChange)="changeLang(language.value)" [style.width.px]="90">
     <mat-option value="vi">{{ "SHARED.I18N.vietnamese" | translate }}</mat-option>
     <mat-option value="en">{{ "SHARED.I18N.english" | translate }}</mat-option>
   </mat-select>

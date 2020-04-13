@@ -1,0 +1,17 @@
+.header, .nav, .nav__left, .nav__right {
+  display: flex;
+  align-items: center;
+}
+.header {
+  margin-bottom: 1rem;
+  color: #c3002f;
+}
+.nav {
+  flex-grow: 1;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.active {
+  background-color: #6fb5fb;
+}

@@ -20,7 +20,11 @@
           #password="ngModel">
       </mat-form-field>
       <div [hidden]="password.valid || !password.touched" class="error error-message">
-        {{ "AUTH.passwordIsRequired" | translate }}
+        <label *ngIf="password.errors?.required">{{ "AUTH.passwordIsRequired" | translate }}</label>
+      </div>
+
+      <div [hidden]="!isShowErrorMsg" class="error error-message">
+        {{ 'AUTH.incorrectUserNameOrPassword' | translate }}
       </div>
 
       <div class="login__action">
