@@ -7,6 +7,8 @@
 
 <app-auth-layout *ngIf="auth.isLoggedIn()">
   <app-header></app-header>
-  <router-outlet></router-outlet>
+  <div class="body" style="min-height: calc(100% - 170px);">
+    <router-outlet></router-outlet>
+  </div>
   <app-footer></app-footer>
 </app-auth-layout>

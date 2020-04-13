@@ -54,7 +54,7 @@
     <ng-container matColumnDef="controls">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <a mat-icon-button color="primary" [routerLink]="['/user', element._id]">
+        <a mat-icon-button color="primary" [routerLink]="['./', element._id]">
           <mat-icon>info</mat-icon>
         </a>
         <a mat-icon-button color="primary" [routerLink]="['/user', element._id, 'edit']">
