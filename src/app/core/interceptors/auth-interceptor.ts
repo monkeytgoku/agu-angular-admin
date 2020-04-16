@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const authToken = this.auth.getAuthorizationToken();
     // the HttpRequest and HttpResponse instance properties are readonly
     // The clone() method's hash argument allows you to mutate specific properties of the request while copying the others.
-    const authReq = req.clone({headers: req.headers.set('Authorization', authToken)});
+    const authReq = req.clone({headers: req.headers.set('Authorization', authToken), withCredentials: true});
     return next.handle(authReq);
   }
 }

@@ -10,5 +10,10 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   title = 'agu-angular-admin';
 
-  constructor(public auth: AuthService) {  }
+  constructor(public auth: AuthService) {
+    if (!this.auth.APP_STORAGE.expiresAt) {
+      console.log('AppComponent refreshToken()');
+      this.auth.refreshToken();
+    }
+  }
 }

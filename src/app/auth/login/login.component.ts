@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AuthService } from '../auth.service';
@@ -18,9 +19,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   };
   isShowErrorMsg = false;
 
-  constructor(private authService: AuthService, private translate: TranslateService) { }
+  constructor(private authService: AuthService, private translate: TranslateService, private router: Router) {}
 
   ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigateByUrl('/user');
+    }
   }
 
   ngAfterViewInit() {

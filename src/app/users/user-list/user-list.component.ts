@@ -18,7 +18,7 @@ export class UserListComponent implements OnInit {
 
   private searchText$ = new Subject<string>();
   users: User[] = [];
-  displayedColumns: string[] = ['avatar', 'user_name', 'full_name', 'email', 'status', 'created_date', 'controls'];
+  displayedColumns: string[] = ['avatar', 'userName', 'fullName', 'email', 'status', 'createdDate', 'controls'];
   dataSource: MatTableDataSource<any>;
 
   constructor(private usersService: UsersService) { }
@@ -45,9 +45,10 @@ export class UserListComponent implements OnInit {
   }
 
   getUsers() {
-    this.usersService.searchUsers().subscribe(data => {
-      if (data) {
-        this.dataSource = new MatTableDataSource<any>(data);
+    this.usersService.searchUsers().subscribe((result: User[]) => {
+      if (result) {
+        console.log(result);
+        this.dataSource = new MatTableDataSource<any>(result);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       }

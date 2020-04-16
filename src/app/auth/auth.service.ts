@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, interval, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment as config } from '../../environments/environment';
@@ -14,22 +14,26 @@ export class AuthService {
   private isLoggedinSubject = new BehaviorSubject<boolean>(false);
   $isLoggedin = this.isLoggedinSubject.asObservable();
   returnUrl = '/user';
+  APP_STORAGE = {
+    token: '',
+    expiresIn: 0,
+    expiresAt: null,
+    currentUser: {}
+  };
+  $refreshToken: Subscription;
 
   constructor(
     private http: HttpService,
     private router: Router
   ) { }
 
-  getAuthStatus() {
-    return this.isLoggedinSubject.value;
-  }
-
   // tslint:disable-next-line: variable-name
   login(user_name: string, password: string) {
-    return this.http.post(config.auth.authUrl, {user_name, password})
+    return this.http.post(config.auth.authUrl, { user_name, password })
       .pipe(
         map(
           result => {
+            console.log(result);
             if (result) {
               this.setSession(result);
               this.isLoggedinSubject.next(true);
@@ -44,37 +48,77 @@ export class AuthService {
   setSession(authResult) {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
 
-    localStorage.setItem('token', authResult.token);
-    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()) );
-    localStorage.setItem('current_user', JSON.stringify(authResult.user) );
+    // localStorage.setItem('token', authResult.token);
+    // localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+    // localStorage.setItem('current_user', JSON.stringify(authResult.user));
+
+    // cookie
+    this.APP_STORAGE.token = authResult.token;
+    this.APP_STORAGE.expiresIn = parseInt(authResult.expiresIn, 10);
+    this.APP_STORAGE.expiresAt = JSON.stringify(expiresAt.valueOf());
+    this.APP_STORAGE.currentUser = JSON.stringify(authResult.user);
+
+    this.scheduleRefresh();
   }
 
-  getAuthorizationToken() {
-    return `Bearer ${localStorage.getItem('token')}`;
+  scheduleRefresh() {
+    if (!this.isLoggedIn()) { return; }
+    this.unscheduleRefresh();
+
+    // const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    console.log('expiresIn:', this.APP_STORAGE.expiresIn);
+
+    const expiresIn$ = interval(this.APP_STORAGE.expiresIn * 1000);
+    this.$refreshToken = expiresIn$.subscribe(() => this.refreshToken());
   }
 
   isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
+    // const expiresAt = localStorage.getItem('expires_at');
+    const expiresAt = JSON.parse(this.APP_STORAGE.expiresAt);
+    return moment().isBefore(moment(expiresAt));
   }
 
-  getExpiration() {
-    const expiration = localStorage.getItem('expires_at');
-    const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
+  unscheduleRefresh() {
+    if (this.$refreshToken) {
+      this.$refreshToken.unsubscribe();
+    }
+  }
+
+  refreshToken() {
+    console.log('refreshToken');
+    this.http.post(config.auth.refreshTokenUrl, {}).subscribe(
+      result => this.setSession(result)
+    );
+  }
+
+  getAuthorizationToken() {
+    return `Bearer ${this.APP_STORAGE.token}`;
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expires_at');
-    localStorage.removeItem('current_user');
-    this.isLoggedinSubject.next(false);
-    this.returnUrl = '/user';
-    this.router.navigateByUrl('/login');
+    return this.http.get(config.auth.logoutUrl).subscribe(result => {
+      console.log(result);
+      // localStorage.removeItem('token');
+      // localStorage.removeItem('expires_at');
+      // localStorage.removeItem('current_user');
+
+      this.APP_STORAGE = {
+        token: '',
+        expiresIn: 0,
+        expiresAt: null,
+        currentUser: {}
+      };
+
+      this.isLoggedinSubject.next(false);
+      this.returnUrl = '/user';
+      this.router.navigateByUrl('/login');
+    });
   }
 
   checkPermission(role) {
-    const currentUser = JSON.parse(localStorage.getItem('current_user'));
-    const roles: string[] = currentUser.roles.split(',');
-    return roles.indexOf(role) >= 0;
+    // const currentUser = JSON.parse(localStorage.getItem('current_user'));
+    // const roles: string[] = currentUser.roles.split(',');
+    // return roles.indexOf(role) >= 0;
+    return true;
   }
 }

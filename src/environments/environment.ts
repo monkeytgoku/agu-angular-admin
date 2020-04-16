@@ -8,7 +8,9 @@ export const environment = {
     baseUrl: 'http://localhost:9999/api/v1',
   },
   auth : {
-    authUrl: 'http://localhost:9999/api/v1/login'
+    authUrl: 'http://localhost:9999/api/v1/login',
+    logoutUrl: 'http://localhost:9999/api/v1/logout',
+    refreshTokenUrl: 'http://localhost:9999/api/v1/refresh'
   },
 };
 
