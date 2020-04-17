@@ -19,7 +19,7 @@
     </div>
 
     <div class="nav__right">
-      <label style="color: blue;">Signed in as {{ currentUser['user_name'] }}</label>
+      <label style="color: blue;">Signed in as {{ (auth.$currentUser | async)['user_name'] }}</label>
       <a mat-button (click)="logout()"><mat-icon style="padding-bottom: 3px;">exit_to_app</mat-icon>{{ "AUTH.logout" | translate }}</a>
       <div class="multi-lang">
         <app-multi-language [enabledLabel]="false"></app-multi-language>

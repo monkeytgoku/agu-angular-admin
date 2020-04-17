@@ -1,0 +1,104 @@
+<div class="user-new">
+  <h1 mat-dialog-title>{{ data.type==='add' ? 'New User' : 'Edit User' }}</h1>
+  <div mat-dialog-content>
+    <form class="user-form" [formGroup]="userForm">
+      <div class="row">
+        <div class="col-1-of-2">
+          <mat-form-field>
+            <mat-label>User Name</mat-label>
+            <input matInput formControlName="user_name" appInputFormat [inputFormat]="'lowercase'" required>
+          </mat-form-field>
+          <div *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="error">
+            <div *ngIf="userName.errors.required">
+              User Name is required.
+            </div>
+            <div *ngIf="userName.errors.forbiddenName">
+              User Name was used.
+            </div>
+          </div>
+        </div>
+        <div class="col-1-of-2">
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1-of-2">
+          <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="first_name">
+          </mat-form-field>
+        </div>
+        <div class="col-1-of-2">
+          <mat-form-field>
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="last_name">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1-of-2">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required>
+          </mat-form-field>
+        </div>
+        <div class="col-1-of-2">
+          <mat-form-field>
+            <mat-label>Birthday</mat-label>
+            <input matInput formControlName="birthday">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1-of-2">
+          <mat-form-field>
+            <mat-label>Gender</mat-label>
+            <input matInput formControlName="gender">
+          </mat-form-field>
+        </div>
+        <div class="col-1-of-2">
+          <mat-form-field>
+            <mat-label>Marital Status</mat-label>
+            <input matInput formControlName="marital_status">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1-of-2">
+          <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address">
+          </mat-form-field>
+        </div>
+        <div class="col-1-of-2">
+          <mat-form-field>
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="mobile">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1-of-2">
+          <div>
+            <mat-label>Avatar</mat-label>
+          </div>
+        </div>
+        <div class="col-1-of-2">
+          <mat-form-field>
+            <mat-label>Language</mat-label>
+            <input matInput formControlName="lang">
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div mat-dialog-actions class="user-new__controls">
+    <button mat-button (click)="dialogRef.close();">Cancel</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="userForm.value"  [disabled]="!userForm.valid" cdkFocusInitial>
+      {{ data.type==='add' ? 'Add' : 'Update' }}
+    </button>
+  </div>
+</div>

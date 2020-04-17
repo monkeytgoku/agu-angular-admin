@@ -20,6 +20,8 @@ export class AuthService {
     expiresAt: null,
     currentUser: {}
   };
+  private currentUser = new BehaviorSubject<any>(this.APP_STORAGE.currentUser);
+  $currentUser = this.currentUser.asObservable();
   $refreshToken: Subscription;
 
   constructor(
@@ -58,6 +60,8 @@ export class AuthService {
     this.APP_STORAGE.expiresAt = JSON.stringify(expiresAt.valueOf());
     this.APP_STORAGE.currentUser = JSON.stringify(authResult.user);
 
+    this.currentUser.next(authResult.user);
+
     this.scheduleRefresh();
   }
 
@@ -87,7 +91,8 @@ export class AuthService {
   refreshToken() {
     console.log('refreshToken');
     this.http.post(config.auth.refreshTokenUrl, {}).subscribe(
-      result => this.setSession(result)
+      result => this.setSession(result),
+      error => console.log('refreshToken: ', error.error.message)
     );
   }
 

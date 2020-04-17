@@ -1,0 +1,12 @@
+.user-new {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+
+  &__controls {
+    justify-content: flex-end;
+  }
+  .col-1-of-2>* {
+    width: 100%;
+  }
+}

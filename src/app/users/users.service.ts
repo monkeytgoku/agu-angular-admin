@@ -12,7 +12,23 @@ import { User } from '../shared/models/user.model';
 export class UsersService {
   constructor(private http: HttpService) { }
 
-  searchUsers(params = {}): Observable<User[]> {
+  getUsers(params = {}): Observable<User[]> {
     return this.http.get(`${config.api.baseUrl}/users`, params).pipe(map(users => users.map(user => new User(user))));
+  }
+
+  getUserById(userId) {
+    return this.http.get(`/users/${userId}`);
+  }
+
+  addUser(user) {
+    return this.http.post('/users/register', user);
+  }
+
+  updateUser(user) {
+    return this.http.put(`/users/${user._id}`, user);
+  }
+
+  deleteUser(user) {
+    return this.http.delete(`/users/${user._id}`);
   }
 }
